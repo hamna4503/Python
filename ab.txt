@@ -1,0 +1,6 @@
+123The Microsoft Excel Window
+ 
+Microsoft Excel is an electronic spreadsheet. You can use it to organize your data into rows and columns. 
+You can also use it to perform mathematical calculations quickly. This tutorial teaches Microsoft Excel basics.
+ Although knowledge of how to navigate in a Windows environment is helpful, this tutorial was created for the computer novice.
+. The Microsoft Excel window appears and your screen looks similar to the one shown here. 
