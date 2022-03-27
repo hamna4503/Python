@@ -1,0 +1,101 @@
+import pygame
+import random
+import math
+
+pygame.init()
+fps=45
+screen_width=900
+screen_height=600
+exit_game=False
+clock=pygame.time.Clock()
+
+screen=pygame.display.set_mode((screen_width,screen_height),pygame.RESIZABLE)
+
+
+def title():
+    icon = pygame.image.load('icon1.png').convert_alpha()
+    pygame.display.set_caption("SPACEHUB")
+    pygame.display.set_icon(icon)
+    welcome=pygame.image.load("welcome.png")
+    welcome = pygame.transform.scale(welcome, (screen.get_width(),screen.get_height())).convert_alpha()
+    screen.blit(welcome,(0,0))
+    pygame.display.update()
+    exit_game=False
+    while not exit_game:
+        for event in pygame.event.get():
+            if event.type==pygame.QUIT:
+                exit_game=True
+            if event.type==pygame.WINDOWRESIZED:
+                welcome = pygame.transform.scale(welcome, (screen.get_width(),screen.get_height()))
+                screen.blit(welcome, (0, 0))
+                pygame.display.update()
+            if event.type==pygame.KEYDOWN:
+                if event.key==pygame.K_SPACE or event.key==pygame.K_RETURN:
+                    gameloop()
+
+
+def displayship(x_shipfun,y_shipfun):
+    ship = pygame.image.load('ship4.png').convert_alpha()
+    ship = pygame.transform.scale(ship, (120, 120)).convert_alpha()
+    screen.blit(ship, (x_shipfun, y_shipfun))
+
+def collison(s_x,s_y,a_x,a_y):
+    distance= math.sqrt(math.pow(s_x-a_x,2)+math.pow(s_y-a_y,2))
+    print(distance)
+    if distance<10:
+        pygame.quit()
+
+
+
+def gameloop():
+    exit_game=False
+    ship_x = 3
+    ship_y = 4
+    aestroid_x=100
+    aestroid_y=500
+    aestroid=pygame.image.load("aestroid2.png").convert_alpha()
+    aestroid=pygame.transform.scale(aestroid,(100,100)).convert_alpha()
+    background = pygame.image.load('background1.png').convert_alpha()
+    icon = pygame.image.load('icon1.png').convert_alpha()
+    pygame.display.set_caption("SPACEHUB")
+    pygame.display.set_icon(icon)
+
+    pygame.display.update()
+
+    while not exit_game:
+        background = pygame.transform.scale(background, (screen.get_width(), screen.get_height()))
+        screen.blit(background, (0, 0))
+        displayship(ship_x, ship_y)
+        screen.blit(aestroid, (aestroid_x, aestroid_y))
+        pygame.display.update()
+
+        collison(ship_x,ship_y,aestroid_x,aestroid_y)
+
+        for event in pygame.event.get():
+
+            if event.type==pygame.QUIT:
+                exit_game=True
+
+            if event.type==pygame.WINDOWRESIZED:
+                background = pygame.transform.scale(background, (screen.get_width(),screen.get_height()))
+                screen.blit(background, (0, 0))
+                pygame.display.update()
+
+            if event.type== pygame.KEYDOWN:
+               if event.key==pygame.K_DOWN:
+                   ship_y+=45
+               if event.key==pygame.K_UP:
+                   ship_y-=45
+               if event.key==pygame.K_RIGHT:
+                   ship_x+=45
+               if event.key==pygame.K_LEFT:
+                   ship_x-=45
+
+
+        pygame.display.update()
+        clock.tick(fps)
+
+title()
+pygame.display.update()
+pygame.quit()
+quit()
