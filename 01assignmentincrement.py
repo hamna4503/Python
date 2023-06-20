@@ -16,7 +16,7 @@ g=float(input("Enter the grade scale:  "))
 print("The updated salary is",increment(s,g))
 
 
-
+#calling the function -- give random comment to reflect on github
 
 
 
